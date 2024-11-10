@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "77223485260",
+    "project_id": "smart-rail-f45e6",
+    "storage_bucket": "smart-rail-f45e6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:77223485260:android:a0f72eaa266218abd579e9",
+        "android_client_info": {
+          "package_name": "com.example.smartrail"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsmzg78AoCNFIQgbJWL7Ca6FOJfhlu2gU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
