@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <style name="Theme.YourApp" parent="Theme.MaterialComponents.DayNight">
+        <!-- Other theme attributes -->
+        <item name="buttonStyle">@style/CustomButton</item>
+    </style>
+
+    <style name="CustomButton" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@null</item>
+        <item name="android:background">#000000</item> <!-- Default black background -->
+        <item name="android:textColor">#B0B0B0</item> <!-- Default grey text -->
+    </style>
+</resources>
