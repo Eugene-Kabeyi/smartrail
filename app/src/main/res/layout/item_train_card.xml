@@ -1,29 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- res/layout/item_train_card.xml -->
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    app:cardElevation="4dp"
     app:cardCornerRadius="8dp"
-    android:padding="16dp">
+    app:cardElevation="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <!-- Train Image -->
         <ImageView
             android:id="@+id/trainImageView"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:scaleType="center"
-            android:src="@drawable/img_train" /> <!-- Make sure img_train exists in res/drawable -->
+            android:layout_height="180dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="Train Image" />
 
-        <!-- Train Details -->
+        <!-- Train Name -->
         <TextView
             android:id="@+id/trainNameTextView"
             android:layout_width="wrap_content"
@@ -31,41 +29,64 @@
             android:text="Train Name"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:layout_marginTop="8dp" />
+            android:paddingTop="8dp" />
 
+        <!-- Departure Time -->
         <TextView
             android:id="@+id/departureTimeTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Departure: 10:00 AM" />
+            android:text="Departure Time: "
+            android:textSize="14sp"
+            android:paddingTop="4dp" />
 
+        <!-- Arrival Time -->
         <TextView
             android:id="@+id/arrivalTimeTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Arrival: 2:00 PM" />
+            android:text="Arrival Time: "
+            android:textSize="14sp"
+            android:paddingTop="4dp" />
 
+        <!-- Date -->
         <TextView
             android:id="@+id/dateTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Date: 2023-10-15" />
+            android:text="Date: "
+            android:textSize="14sp"
+            android:paddingTop="4dp" />
 
+        <!-- Seats -->
+        <TextView
+            android:id="@+id/seatsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Seats: "
+            android:textSize="14sp"
+            android:paddingTop="4dp" />
+
+        <!-- Price -->
         <TextView
             android:id="@+id/priceTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Price per Seat: $50" />
+            android:text="Price: "
+            android:textSize="14sp"
+            android:paddingTop="4dp" />
 
         <!-- Book Now Button -->
         <Button
             android:id="@+id/bookNowButton"
-            android:layout_width="wrap_content"
+            android:layout_width="360dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/black"
+            android:padding="12dp"
             android:text="Book Now"
-            app:backgroundTint="#000000"
             android:textColor="#FFFFFF"
-            android:layout_marginTop="8dp" />
+            app:layout_constraintTop_toBottomOf="@id/priceTextView" />
+
     </LinearLayout>
 </androidx.cardview.widget.CardView>

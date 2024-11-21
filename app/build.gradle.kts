@@ -40,12 +40,19 @@ dependencies {
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+    implementation(libs.firebase.database)
+    implementation(libs.firebase.storage)
+    implementation(libs.firebase.auth)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
     // Import the Firebase BoM
     implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
+    implementation("com.github.bumptech.glide:glide:4.15.1")
+
+    // To avoid issues with annotation processing, add this:
+    annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")
 
 
     // TODO: Add the dependencies for Firebase products you want to use

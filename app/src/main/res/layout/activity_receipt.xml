@@ -1,123 +1,78 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    tools:context=".ReceiptActivity">
+    android:orientation="vertical"
+    android:padding="16dp">
 
-    <!-- Title -->
+    <!-- Receipt details -->
     <TextView
-        android:id="@+id/receiptTitleTextView"
+        android:id="@+id/receiptTrainNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Booking Receipt"
-        android:textSize="24sp"
+        android:text="Train Name"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/receiptDepartureTimeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Departure Time"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/receiptArrivalTimeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Arrival Time"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/receiptDateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/receiptPassengerNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Passenger Name"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/receiptNumberOfPassengersTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Number of Passengers"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/receiptPriceTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Price per Seat"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/receiptTotalCostTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Cost"
+        android:textSize="16sp"
         android:textStyle="bold"
-        android:textColor="#000000"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginBottom="16dp"/>
+        android:textColor="@android:color/holo_red_dark" />
 
-    <!-- Train Name -->
-    <TextView
-        android:id="@+id/trainNameTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Train Name: "
-        android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/receiptTitleTextView"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="16dp"/>
-
-    <!-- Departure Time -->
-    <TextView
-        android:id="@+id/departureTimeTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Departure Time: "
-        android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/trainNameTextView"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="8dp"/>
-
-    <!-- Arrival Time -->
-    <TextView
-        android:id="@+id/arrivalTimeTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Arrival Time: "
-        android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/departureTimeTextView"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="8dp"/>
-
-    <!-- Date -->
-    <TextView
-        android:id="@+id/dateTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Date: "
-        android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/arrivalTimeTextView"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="8dp"/>
-
-    <!-- Number of Seats -->
-    <TextView
-        android:id="@+id/seatsTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Number of Seats: "
-        android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/dateTextView"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="8dp"/>
-
-    <!-- Price per Seat -->
-    <TextView
-        android:id="@+id/priceTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Price per Seat: "
-        android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/seatsTextView"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="8dp"/>
-
-    <!-- Total Cost -->
-    <TextView
-        android:id="@+id/totalCostTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Total Cost: "
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="#000000"
-        app:layout_constraintTop_toBottomOf="@id/priceTextView"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="16dp"/>
-
-    <!-- Back or Print Button -->
+    <!-- Done Button -->
     <Button
-        android:id="@+id/backButton"
-        android:layout_width="wrap_content"
+        android:id="@+id/doneButton"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Back to Home"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="#000000"
-        app:layout_constraintTop_toBottomOf="@id/totalCostTextView"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="32dp"/>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_marginTop="20dp"
+        android:text="Done"
+        android:backgroundTint="@color/black"
+        android:textColor="@android:color/white"
+        android:textSize="16sp" />
+</LinearLayout>

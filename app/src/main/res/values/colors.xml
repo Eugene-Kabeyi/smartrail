@@ -8,7 +8,6 @@
     </style>
 
     <style name="CustomButton" parent="Widget.MaterialComponents.Button">
-        <item name="backgroundTint">@null</item>
         <item name="android:background">#000000</item> <!-- Default black background -->
         <item name="android:textColor">#B0B0B0</item> <!-- Default grey text -->
     </style>
