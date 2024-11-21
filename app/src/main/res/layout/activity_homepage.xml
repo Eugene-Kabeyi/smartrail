@@ -46,7 +46,7 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_train" /> <!-- Add your train icon -->
+                android:src="@drawable/ic_train" /> <!-- Replace with train icon -->
 
             <TextView
                 android:layout_width="wrap_content"
@@ -81,7 +81,7 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_bookings" /> <!-- Replace with your booking icon -->
+                android:src="@drawable/ic_bookings" /> <!-- Replace with booking icon -->
 
             <TextView
                 android:layout_width="wrap_content"
@@ -116,7 +116,7 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_profile" /> <!-- Replace with your profile icon -->
+                android:src="@drawable/ic_profile" /> <!-- Replace with profile icon -->
 
             <TextView
                 android:layout_width="wrap_content"
@@ -129,4 +129,40 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
+    <!-- Admin Panel Button -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/adminPanelCard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#F0F0F0"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintTop_toBottomOf="@id/profileCard"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.9">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_admin" /> <!-- Replace with admin icon -->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="16dp"
+                android:text="Admin Panel"
+                android:textSize="18sp"
+                android:textColor="#000000" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+

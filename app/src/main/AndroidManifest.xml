@@ -23,12 +23,14 @@
         </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".TrainCardActivity" />
-        <activity android:name=".ReceiptActivity" />
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".MyBookingsActivity" />
-        <activity android:name=".BookingActivity" />
         <activity android:name=".HomepageActivity" />
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".AdminPanelActivity" />
+        <activity android:name=".TrainCardActivity" />
+        <activity android:name=".TrainListActivity" />
+        <activity android:name=".BookingActivity" />
+        <activity android:name=".ReceiptActivity" />
+        <activity android:name=".MyBookingsActivity" />
 
 
     </application>

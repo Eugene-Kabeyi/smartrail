@@ -20,8 +20,8 @@ public class HomepageActivity extends AppCompatActivity {
         viewTrainsCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Navigate to item_train_card activity
-                Intent intent = new Intent(HomepageActivity.this, TrainCardActivity.class);
+                // Navigate to TrainListActivity
+                Intent intent = new Intent(HomepageActivity.this, TrainListActivity.class);
                 startActivity(intent);
             }
         });
@@ -31,7 +31,7 @@ public class HomepageActivity extends AppCompatActivity {
         myBookingsCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Navigate to activity_my_bookings
+                // Navigate to MyBookingsActivity
                 Intent intent = new Intent(HomepageActivity.this, MyBookingsActivity.class);
                 startActivity(intent);
             }
@@ -42,8 +42,19 @@ public class HomepageActivity extends AppCompatActivity {
         profileCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Navigate to activity_profile
+                // Navigate to ProfileActivity
                 Intent intent = new Intent(HomepageActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // Admin Panel Card
+        CardView adminPanelCard = findViewById(R.id.adminPanelCard);
+        adminPanelCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate to AdminPanelActivity
+                Intent intent = new Intent(HomepageActivity.this, AdminPanelActivity.class);
                 startActivity(intent);
             }
         });
