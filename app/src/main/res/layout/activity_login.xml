@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,36 +8,30 @@
     android:padding="16dp"
     tools:context=".LoginActivity">
 
-    <!-- App Logo/Image (optional, can replace with your logo or icon) -->
-
-    <!-- Username EditText -->
-
+    <!-- App Logo/Image -->
     <ImageView
         android:id="@+id/logo"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="36dp"
         android:src="@drawable/ic_train"
-        app:layout_constraintHorizontal_bias="0.523"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Username EditText -->
     <EditText
         android:id="@+id/usernameEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:contentDescription="Username input"
         android:hint="Username"
-        android:importantForAccessibility="yes"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/logo"
-        app:layout_constraintWidth_percent="0.8"
-        tools:ignore="EditableContentDescCheck" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.8" />
 
     <!-- Password EditText -->
     <EditText
@@ -45,53 +40,49 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:hint="Password"
-        android:importantForAccessibility="yes"
         android:inputType="textPassword"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/usernameEditText"
-        app:layout_constraintWidth_percent="0.8"
-        tools:ignore="TouchTargetSizeCheck" />
+        app:layout_constraintWidth_percent="0.8" />
 
     <!-- Login Button -->
+    <Button
+        android:id="@+id/button"
+        android:layout_width="240dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="@color/black"
+        android:text="Login"
+        app:layout_constraintTop_toBottomOf="@id/passwordEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- "Don't have an account?" Link -->
+    <TextView
+        android:id="@+id/signUpLink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Don't have an account? Sign Up"
+        android:textColor="#B0B0B0"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Forgot Password Link -->
     <TextView
         android:id="@+id/forgotPasswordLink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="Forgot Password?"
         android:textColor="#B0B0B0"
         android:textSize="14sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="384dp"
-        tools:ignore="MissingConstraints" />
-
-    <!-- Sign Up Link -->
-    <TextView
-        android:id="@+id/signUpLink"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Don't have an account? Sign Up"
-        android:textColor="#B0B0B0"
-        android:textSize="14sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/forgotPasswordLink" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="240dp"
-        android:layout_height="58dp"
-        android:text="Login"
-        android:backgroundTint="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/forgotPasswordLink"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintTop_toBottomOf="@id/signUpLink"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordEditText"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

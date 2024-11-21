@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -15,7 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints"/>
+        tools:ignore="MissingConstraints" />
 
     <!-- Train Name -->
     <TextView
@@ -28,7 +29,7 @@
         app:layout_constraintTop_toBottomOf="@id/trainImageView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintMarginTop="8dp"/>
+        android:layout_marginTop="8dp" />
 
     <!-- Departure Time -->
     <TextView
@@ -39,7 +40,7 @@
         app:layout_constraintTop_toBottomOf="@id/trainNameTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintMarginTop="8dp"/>
+        android:layout_marginTop="8dp" />
 
     <!-- Arrival Time -->
     <TextView
@@ -50,7 +51,7 @@
         app:layout_constraintTop_toBottomOf="@id/departureTimeTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintMarginTop="8dp"/>
+        android:layout_marginTop="8dp" />
 
     <!-- Date -->
     <TextView
@@ -61,7 +62,7 @@
         app:layout_constraintTop_toBottomOf="@id/arrivalTimeTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintMarginTop="8dp"/>
+        android:layout_marginTop="8dp" />
 
     <!-- Price per Seat -->
     <TextView
@@ -72,7 +73,7 @@
         app:layout_constraintTop_toBottomOf="@id/dateTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintMarginTop="8dp"/>
+        android:layout_marginTop="8dp" />
 
     <!-- Number of Passengers -->
     <EditText
@@ -83,7 +84,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/priceTextView"
-        app:layout_constraintMarginTop="16dp"/>
+        android:layout_marginTop="16dp" />
 
     <!-- Passenger Name -->
     <EditText
@@ -94,7 +95,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/numberofPassengersEditText"
-        app:layout_constraintMarginTop="16dp"/>
+        android:layout_marginTop="16dp" />
 
     <!-- Confirm Booking Button -->
     <Button
@@ -106,7 +107,6 @@
         app:layout_constraintTop_toBottomOf="@id/passengerNameEditText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintMarginTop="32dp"/>
+        android:layout_marginTop="32dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
