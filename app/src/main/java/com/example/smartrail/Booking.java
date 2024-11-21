@@ -8,14 +8,12 @@ public class Booking {
     private String date;
     private String price;
     private String passengerName;
-    private int numberOfPassengers; // Change to int for easier calculations
-    private double totalCost; // New field for total cost
+    private int numberOfPassengers;
+    private double totalCost;
 
-    // Default constructor (required for Firebase)
-    public Booking() {
-    }
+    // Default constructor required for Firebase
+    public Booking() {}
 
-    // Constructor
     public Booking(String bookingId, String trainName, String departureTime, String arrivalTime, String date,
                    String price, String passengerName, int numberOfPassengers, double totalCost) {
         this.bookingId = bookingId;
@@ -25,8 +23,8 @@ public class Booking {
         this.date = date;
         this.price = price;
         this.passengerName = passengerName;
-        this.numberOfPassengers = numberOfPassengers; // Store as integer
-        this.totalCost = totalCost; // Initialize total cost
+        this.numberOfPassengers = numberOfPassengers;
+        this.totalCost = totalCost;
     }
 
     // Getters and setters
@@ -70,11 +68,11 @@ public class Booking {
         this.date = date;
     }
 
-    public String getPrice() {
+    public String getPricePerSeat() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPricePerSeat(String price) {
         this.price = price;
     }
 
@@ -87,18 +85,18 @@ public class Booking {
     }
 
     public int getNumberOfPassengers() {
-        return numberOfPassengers; // Return as integer
+        return numberOfPassengers;
     }
 
     public void setNumberOfPassengers(int numberOfPassengers) {
-        this.numberOfPassengers = numberOfPassengers; // Store as integer
+        this.numberOfPassengers = numberOfPassengers;
     }
 
-    public double getTotalCost() { // New getter
+    public double getTotalCost() {
         return totalCost;
     }
 
-    public void setTotalCost(double totalCost) { // New setter
+    public void setTotalCost(double totalCost) {
         this.totalCost = totalCost;
     }
 }

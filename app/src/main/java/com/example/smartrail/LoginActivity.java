@@ -3,29 +3,37 @@ package com.example.smartrail;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private FirebaseAuth mAuth;
     private EditText usernameEditText, passwordEditText;
     private Button loginButton;
     private TextView forgotPasswordLink, signUpLink;
 
+    // Firebase Realtime Database reference
+    private DatabaseReference databaseReference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login); // Set the layout for login
+        setContentView(R.layout.activity_login);
 
-        // Initialize Firebase Auth
-        mAuth = FirebaseAuth.getInstance();
+        // Initialize Firebase Realtime Database reference
+        databaseReference = FirebaseDatabase.getInstance().getReference("Users");
 
         // Find the views by ID
         usernameEditText = findViewById(R.id.usernameEditText);
@@ -35,32 +43,18 @@ public class LoginActivity extends AppCompatActivity {
         signUpLink = findViewById(R.id.signUpLink);
 
         // Set onClickListener for login button
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loginUser(); // Attempt to log the user in
-            }
-        });
+        loginButton.setOnClickListener(v -> loginUser());
 
         // Set onClickListener for "Sign Up" link
-        signUpLink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Navigate to the Sign Up Activity
-                Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
-                startActivity(intent);
-            }
+        signUpLink.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+            startActivity(intent);
         });
 
         // Set onClickListener for "Forgot Password" link
-        forgotPasswordLink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Navigate to the Forgot Password Activity (if implemented)
-                // You can add functionality for resetting password here
-                Toast.makeText(LoginActivity.this, "Forgot Password Clicked", Toast.LENGTH_SHORT).show();
-            }
-        });
+        forgotPasswordLink.setOnClickListener(v ->
+                Toast.makeText(LoginActivity.this, "Forgot Password Clicked", Toast.LENGTH_SHORT).show()
+        );
     }
 
     private void loginUser() {
@@ -78,19 +72,59 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        // Perform the login using Firebase Authentication
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, task -> {
-                    if (task.isSuccessful()) {
-                        // If sign-in is successful, navigate to the HomepageActivity
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        Intent intent = new Intent(LoginActivity.this, HomepageActivity.class);
-                        startActivity(intent);
-                        finish(); // Close the login activity
-                    } else {
-                        // If sign-in fails, display a message to the user
-                        Toast.makeText(LoginActivity.this, "Authentication Failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+        // Retrieve data from Firebase Realtime Database
+        databaseReference.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                        String userId = userSnapshot.getKey(); // Get the user ID
+                        User user = userSnapshot.getValue(User.class);
+
+                        if (user != null && user.password.equals(password)) {
+                            // Login successful
+                            Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+
+                            // Pass userId to HomepageActivity
+                            Intent intent = new Intent(LoginActivity.this, HomepageActivity.class);
+                            intent.putExtra("userId", userId); // Pass the userId
+                            startActivity(intent);
+                            finish();
+                            return;
+                        }
                     }
-                });
+                    // Incorrect password
+                    passwordEditText.setError("Invalid password.");
+                    Toast.makeText(LoginActivity.this, "Login Failed: Invalid credentials", Toast.LENGTH_SHORT).show();
+                } else {
+                    // Email not found
+                    usernameEditText.setError("Email not registered.");
+                    Toast.makeText(LoginActivity.this, "Login Failed: Email not found", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e("LoginError", "Database error: " + databaseError.getMessage());
+                Toast.makeText(LoginActivity.this, "Database error: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    // User model class
+    public static class User {
+        public String fullName;
+        public String email;
+        public String password;
+
+        public User() {
+            // Default constructor required for calls to DataSnapshot.getValue(User.class)
+        }
+
+        public User(String fullName, String email, String password) {
+            this.fullName = fullName;
+            this.email = email;
+            this.password = password;
+        }
     }
 }

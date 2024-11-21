@@ -7,17 +7,6 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <!-- Train Image -->
-    <ImageView
-        android:id="@+id/trainImageView"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:scaleType="fitCenter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
-
     <!-- Train Name -->
     <TextView
         android:id="@+id/trainNameTextView"
@@ -26,7 +15,7 @@
         android:text="Train Name"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/trainImageView"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="8dp" />
@@ -75,7 +64,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="8dp" />
 
-    <!-- Number of Passengers -->
+    <!-- Number of Passengers (Empty EditText) -->
     <EditText
         android:id="@+id/numberofPassengersEditText"
         android:layout_width="0dp"
@@ -86,7 +75,7 @@
         app:layout_constraintTop_toBottomOf="@id/priceTextView"
         android:layout_marginTop="16dp" />
 
-    <!-- Passenger Name -->
+    <!-- Passenger Name (Empty EditText) -->
     <EditText
         android:id="@+id/passengerNameEditText"
         android:layout_width="0dp"
@@ -110,3 +99,4 @@
         android:layout_marginTop="32dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

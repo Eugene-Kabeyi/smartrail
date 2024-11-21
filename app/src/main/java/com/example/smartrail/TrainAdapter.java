@@ -1,14 +1,11 @@
 package com.example.smartrail;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -19,7 +16,6 @@ import java.util.List;
 public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.TrainViewHolder> {
 
     private List<String> trainIds; // List of train IDs to query Firebase
-    private List<Train> trains;    // List of Train objects to populate RecyclerView
     private OnItemClickListener listener;
 
     public TrainAdapter(List<String> trainIds, OnItemClickListener listener) {
@@ -60,23 +56,22 @@ public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.TrainViewHol
                     holder.seatsTextView.setText("Seats: " + train.getSeats());
                     holder.priceTextView.setText("Price: " + train.getPrice());
 
-                    // Load the train image using Glide
-                    Glide.with(holder.itemView.getContext())
-                            .load(train.getImageUrl()) // Train image URL from Firebase
-                            .into(holder.trainImageView);
-
                     // Handle click event for the Book Now button
                     holder.bookNowButton.setOnClickListener(v -> {
                         if (listener != null) {
                             listener.onItemClick(trainId); // Notify the activity to handle the click
                         }
                     });
+                } else {
+                    // Handle the case where no train data is found
+                    holder.trainNameTextView.setText("Train data not available");
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                // Handle any errors
+                // Handle any errors while querying Firebase
+                holder.trainNameTextView.setText("Error loading train data");
             }
         });
     }
@@ -89,7 +84,6 @@ public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.TrainViewHol
         private TextView dateTextView;
         private TextView seatsTextView;
         private TextView priceTextView;
-        private ImageView trainImageView;
         private TextView bookNowButton;
 
         public TrainViewHolder(View itemView) {
@@ -102,13 +96,12 @@ public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.TrainViewHol
             dateTextView = itemView.findViewById(R.id.dateTextView);
             seatsTextView = itemView.findViewById(R.id.seatsTextView);
             priceTextView = itemView.findViewById(R.id.priceTextView);
-            trainImageView = itemView.findViewById(R.id.trainImageView);
             bookNowButton = itemView.findViewById(R.id.bookNowButton);
         }
     }
 
     // Interface to handle item click
     public interface OnItemClickListener {
-        void onItemClick(String trainId);
+        void onItemClick(String trainId); // Callback to handle item click in the activity
     }
 }

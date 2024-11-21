@@ -2,11 +2,9 @@ package com.example.smartrail;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
-import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,7 +19,6 @@ public class TrainCardActivity extends AppCompatActivity {
     private TextView dateTextView;
     private TextView seatsTextView;
     private TextView priceTextView;
-    private ImageView trainImageView;
     private Button bookNowButton;
 
     private Train selectedTrain; // Store the train data retrieved from Firebase
@@ -38,7 +35,6 @@ public class TrainCardActivity extends AppCompatActivity {
         dateTextView = findViewById(R.id.dateTextView);
         seatsTextView = findViewById(R.id.seatsTextView);
         priceTextView = findViewById(R.id.priceTextView);
-        trainImageView = findViewById(R.id.trainImageView);
         bookNowButton = findViewById(R.id.bookNowButton);
 
         // Retrieve train ID passed from TrainAdapter
@@ -64,7 +60,6 @@ public class TrainCardActivity extends AppCompatActivity {
                 intent.putExtra("date", selectedTrain.getDate());
                 intent.putExtra("seats", selectedTrain.getSeats());
                 intent.putExtra("price", selectedTrain.getPrice());
-                intent.putExtra("imageUrl", selectedTrain.getImageUrl());
                 startActivity(intent);
             }
         });
@@ -86,11 +81,6 @@ public class TrainCardActivity extends AppCompatActivity {
                             dateTextView.setText("Date: " + selectedTrain.getDate());
                             seatsTextView.setText("Seats: " + selectedTrain.getSeats());
                             priceTextView.setText("Price: " + selectedTrain.getPrice());
-
-                            // Use Glide to load the train image from Firebase
-                            Glide.with(TrainCardActivity.this)
-                                    .load(selectedTrain.getImageUrl()) // Train image URL from Firebase
-                                    .into(trainImageView); // ImageView to load the image into
                         } else {
                             // Handle case when data is not available
                             trainNameTextView.setText("Error: No train data found.");

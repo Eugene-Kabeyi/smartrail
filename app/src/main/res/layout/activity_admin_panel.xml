@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:padding="16dp">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
 
-<!-- Train Name -->
+    <!-- Train Name -->
     <EditText
         android:id="@+id/trainNameEditText"
         android:layout_width="0dp"
@@ -18,7 +18,7 @@ android:padding="16dp">
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.8" />
 
-<!-- Departure Time -->
+    <!-- Departure Time -->
     <EditText
         android:id="@+id/departureTimeEditText"
         android:layout_width="0dp"
@@ -31,7 +31,7 @@ android:padding="16dp">
         app:layout_constraintTop_toBottomOf="@id/trainNameEditText"
         app:layout_constraintWidth_percent="0.8" />
 
-<!-- Arrival Time -->
+    <!-- Arrival Time -->
     <EditText
         android:id="@+id/arrivalTimeEditText"
         android:layout_width="0dp"
@@ -44,7 +44,7 @@ android:padding="16dp">
         app:layout_constraintTop_toBottomOf="@id/departureTimeEditText"
         app:layout_constraintWidth_percent="0.8" />
 
-<!-- Date -->
+    <!-- Date -->
     <EditText
         android:id="@+id/dateEditText"
         android:layout_width="0dp"
@@ -57,7 +57,7 @@ android:padding="16dp">
         app:layout_constraintTop_toBottomOf="@id/arrivalTimeEditText"
         app:layout_constraintWidth_percent="0.8" />
 
-<!-- Number of Seats -->
+    <!-- Number of Seats -->
     <EditText
         android:id="@+id/seatsEditText"
         android:layout_width="0dp"
@@ -70,7 +70,7 @@ android:padding="16dp">
         app:layout_constraintTop_toBottomOf="@id/dateEditText"
         app:layout_constraintWidth_percent="0.8" />
 
-<!-- Price per Seat -->
+    <!-- Price per Seat -->
     <EditText
         android:id="@+id/priceEditText"
         android:layout_width="0dp"
@@ -83,29 +83,16 @@ android:padding="16dp">
         app:layout_constraintTop_toBottomOf="@id/seatsEditText"
         app:layout_constraintWidth_percent="0.8" />
 
-<!-- Button to Upload Train Image -->
-<Button
-    android:id="@+id/uploadImageButton"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Upload Image"
-    android:backgroundTint="@color/black"
-    android:textColor="@color/white"
-    app:layout_constraintTop_toBottomOf="@id/priceEditText"
-    app:layout_constraintLeft_toLeftOf="parent"
-    app:layout_constraintRight_toRightOf="parent"
-    android:layout_marginTop="24dp" />
-
-<!-- Button to Save Train Information -->
-<Button
-    android:id="@+id/saveTrainInfoButton"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:backgroundTint="@color/black"
-    android:text="Save Train Information"
-    app:layout_constraintTop_toBottomOf="@id/uploadImageButton"
-    app:layout_constraintLeft_toLeftOf="parent"
-    app:layout_constraintRight_toRightOf="parent"
-    android:layout_marginTop="24dp" />
+    <!-- Button to Save Train Information -->
+    <Button
+        android:id="@+id/saveTrainInfoButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/black"
+        android:text="Save Train Information"
+        app:layout_constraintTop_toBottomOf="@id/priceEditText"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="24dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

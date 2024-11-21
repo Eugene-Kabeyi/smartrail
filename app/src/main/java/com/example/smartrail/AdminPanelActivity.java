@@ -1,54 +1,37 @@
 package com.example.smartrail;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 public class AdminPanelActivity extends AppCompatActivity {
 
     private EditText trainNameEditText, departureTimeEditText, arrivalTimeEditText,
             dateEditText, seatsEditText, priceEditText;
-    private Button uploadImageButton, saveTrainInfoButton;
-    private Uri imageUri;
-    private FirebaseHelper firebaseHelper;
+    private Button saveTrainInfoButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_panel);
 
+        // Find the UI elements by ID
         trainNameEditText = findViewById(R.id.trainNameEditText);
         departureTimeEditText = findViewById(R.id.departureTimeEditText);
         arrivalTimeEditText = findViewById(R.id.arrivalTimeEditText);
         dateEditText = findViewById(R.id.dateEditText);
         seatsEditText = findViewById(R.id.seatsEditText);
         priceEditText = findViewById(R.id.priceEditText);
-        uploadImageButton = findViewById(R.id.uploadImageButton);
         saveTrainInfoButton = findViewById(R.id.saveTrainInfoButton);
 
-        firebaseHelper = new FirebaseHelper();
-
-        uploadImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Open gallery to select image
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setType("image/*");
-                startActivityForResult(intent, 1);
-            }
-        });
-
+        // Set the onClickListener for the save button
         saveTrainInfoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,41 +40,52 @@ public class AdminPanelActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
-            imageUri = data.getData();
-            Toast.makeText(this, "Image selected successfully!", Toast.LENGTH_SHORT).show();
-        }
-    }
-
     private void saveTrainInfo() {
-        String trainName = trainNameEditText.getText().toString();
-        String departureTime = departureTimeEditText.getText().toString();
-        String arrivalTime = arrivalTimeEditText.getText().toString();
-        String date = dateEditText.getText().toString();
-        String seats = seatsEditText.getText().toString();
-        String price = priceEditText.getText().toString();
+        // Get the text from the EditText fields
+        String trainName = trainNameEditText.getText().toString().trim();
+        String departureTime = departureTimeEditText.getText().toString().trim();
+        String arrivalTime = arrivalTimeEditText.getText().toString().trim();
+        String date = dateEditText.getText().toString().trim();
+        String seats = seatsEditText.getText().toString().trim();
+        String price = priceEditText.getText().toString().trim();
 
+        // Check if any field is empty
         if (trainName.isEmpty() || departureTime.isEmpty() || arrivalTime.isEmpty() ||
-                date.isEmpty() || seats.isEmpty() || price.isEmpty() || imageUri == null) {
-            Toast.makeText(this, "Please fill all fields and upload an image!", Toast.LENGTH_SHORT).show();
+                date.isEmpty() || seats.isEmpty() || price.isEmpty()) {
+            Toast.makeText(this, "Please fill all fields!", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        firebaseHelper.uploadTrainImage(imageUri, new FirebaseHelper.UploadCallback() {
-            @Override
-            public void onUploadSuccess(String imageUrl) {
-                Train train = new Train(trainName, departureTime, arrivalTime, date, seats, price, imageUrl);
-                firebaseHelper.saveTrainData(train);
-                Toast.makeText(AdminPanelActivity.this, "Train information saved successfully!", Toast.LENGTH_SHORT).show();
-            }
+        // Create a Train object with the input data
+        Train train = new Train(trainName, departureTime, arrivalTime, date, seats, price);
 
-            @Override
-            public void onUploadFailure(Exception e) {
-                Toast.makeText(AdminPanelActivity.this, "Failed to upload image: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        // Get a reference to the Firebase Realtime Database
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("trains");
+
+        // Generate a unique key for the new train entry
+        String trainId = databaseReference.push().getKey();
+
+        if (trainId != null) {
+            // Save the train data in Firebase under the generated trainId
+            databaseReference.child(trainId).setValue(train)
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(AdminPanelActivity.this, "Train information saved successfully!", Toast.LENGTH_SHORT).show();
+                            clearFields();  // Clear input fields after saving
+                        } else {
+                            Toast.makeText(AdminPanelActivity.this, "Failed to save train information!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
+    }
+
+    // Clear all input fields after saving
+    private void clearFields() {
+        trainNameEditText.setText("");
+        departureTimeEditText.setText("");
+        arrivalTimeEditText.setText("");
+        dateEditText.setText("");
+        seatsEditText.setText("");
+        priceEditText.setText("");
     }
 }

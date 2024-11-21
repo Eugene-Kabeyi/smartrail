@@ -13,14 +13,6 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Train Image -->
-        <ImageView
-            android:id="@+id/trainImageView"
-            android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:scaleType="centerCrop"
-            android:contentDescription="Train Image" />
-
         <!-- Train Name -->
         <TextView
             android:id="@+id/trainNameTextView"
@@ -79,14 +71,12 @@
         <!-- Book Now Button -->
         <Button
             android:id="@+id/bookNowButton"
-            android:layout_width="360dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:backgroundTint="@color/black"
             android:padding="12dp"
             android:text="Book Now"
-            android:textColor="#FFFFFF"
-            app:layout_constraintTop_toBottomOf="@id/priceTextView" />
-
+            android:textColor="#FFFFFF" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

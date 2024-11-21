@@ -6,7 +6,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class ReceiptActivity extends AppCompatActivity {
 
@@ -18,7 +25,9 @@ public class ReceiptActivity extends AppCompatActivity {
     private TextView receiptNumberOfPassengersTextView;
     private TextView receiptPriceTextView;
     private TextView receiptTotalCostTextView;
-    private Button doneButton; // Added Done button
+    private Button doneButton;
+
+    private DatabaseReference bookingsRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,46 +43,63 @@ public class ReceiptActivity extends AppCompatActivity {
         receiptNumberOfPassengersTextView = findViewById(R.id.receiptNumberOfPassengersTextView);
         receiptPriceTextView = findViewById(R.id.receiptPriceTextView);
         receiptTotalCostTextView = findViewById(R.id.receiptTotalCostTextView);
-        doneButton = findViewById(R.id.doneButton); // Initialize Done button
+        doneButton = findViewById(R.id.doneButton);
 
-        // Retrieve booking data from Intent
+        // Firebase database reference for bookings
+        bookingsRef = FirebaseDatabase.getInstance().getReference("bookings");
+
+        // Retrieve booking ID from Intent
         Intent intent = getIntent();
+        String bookingId = intent.getStringExtra("bookingId");
 
-        if (intent != null) {
-            String trainName = intent.getStringExtra("trainName");
-            String departureTime = intent.getStringExtra("departureTime");
-            String arrivalTime = intent.getStringExtra("arrivalTime");
-            String date = intent.getStringExtra("date");
-            String price = intent.getStringExtra("price");
-            String passengerName = intent.getStringExtra("passengerName");
-            String numberOfPassengers = intent.getStringExtra("numberOfPassengers");
-
-            // Calculate total cost
-            double pricePerSeat = Double.parseDouble(price);
-            int numberOfSeats = Integer.parseInt(numberOfPassengers);
-            double totalCost = pricePerSeat * numberOfSeats;
-
-            // Display data in the UI
-            receiptTrainNameTextView.setText("Train Name: " + trainName);
-            receiptDepartureTimeTextView.setText("Departure Time: " + departureTime);
-            receiptArrivalTimeTextView.setText("Arrival Time: " + arrivalTime);
-            receiptDateTextView.setText("Date: " + date);
-            receiptPassengerNameTextView.setText("Passenger Name: " + passengerName);
-            receiptNumberOfPassengersTextView.setText("Number of Passengers: " + numberOfPassengers);
-            receiptPriceTextView.setText("Price per Seat: $" + price);
-            receiptTotalCostTextView.setText("Total Cost: $" + totalCost);
+        if (bookingId != null) {
+            fetchBookingDetails(bookingId);
         } else {
-            // Handle error if Intent is null
-            Toast.makeText(this, "No booking details found!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "No booking ID found!", Toast.LENGTH_SHORT).show();
         }
 
         // Handle Done button click
         doneButton.setOnClickListener(v -> {
-            // Navigate back to the homepage (MainActivity)
             Intent homeIntent = new Intent(ReceiptActivity.this, HomepageActivity.class);
-            homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(homeIntent);
-            finish(); // Close the ReceiptActivity
+            startActivity(intent);
         });
+    }
+
+    private void fetchBookingDetails(String bookingId) {
+        // Fetch booking details from Firebase
+        bookingsRef.child(bookingId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    // Parse the booking data
+                    Booking booking = snapshot.getValue(Booking.class);
+
+                    if (booking != null) {
+                        displayBookingDetails(booking);
+                    } else {
+                        Toast.makeText(ReceiptActivity.this, "Failed to load booking details!", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(ReceiptActivity.this, "Booking not found!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(ReceiptActivity.this, "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void displayBookingDetails(Booking booking) {
+        // Populate the TextViews with the booking data
+        receiptTrainNameTextView.setText("Train Name: " + booking.getTrainName());
+        receiptDepartureTimeTextView.setText("Departure Time: " + booking.getDepartureTime());
+        receiptArrivalTimeTextView.setText("Arrival Time: " + booking.getArrivalTime());
+        receiptDateTextView.setText("Date: " + booking.getDate());
+        receiptPassengerNameTextView.setText("Passenger Name: " + booking.getPassengerName());
+        receiptNumberOfPassengersTextView.setText("Number of Passengers: " + booking.getNumberOfPassengers());
+        receiptPriceTextView.setText("Price per Seat: $" + booking.getPricePerSeat());
+        receiptTotalCostTextView.setText("Total Cost: $" + booking.getTotalCost());
     }
 }
